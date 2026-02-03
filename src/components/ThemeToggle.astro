@@ -2,7 +2,7 @@
 ---
 
 <button
-  id="theme-toggle"
+  data-theme-toggle
   class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
   aria-label="Toggle theme"
 >
@@ -13,7 +13,7 @@
 
 <script>
   (function() {
-    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggle = document.querySelector('[data-theme-toggle]');
     if (!themeToggle) return;
 
     const initialTheme = localStorage.getItem('theme');
