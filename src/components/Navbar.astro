@@ -1,6 +1,5 @@
 ---
-import ThemeToggle from './ThemeToggle';
-import { Menu, X } from 'lucide-react';
+import ThemeToggle from './ThemeToggle.astro';
 
 const navItems = [
   { name: '首页', href: '/' },
@@ -53,15 +52,63 @@ const navItems = [
             )}
           </div>
         ))}
-        <ThemeToggle client:load />
+        <ThemeToggle />
       </div>
 
       <div class="md:hidden flex items-center">
-        <ThemeToggle client:load />
-        <button class="ml-2 p-2">
-          <Menu size={24} />
+        <ThemeToggle />
+        <button id="mobile-menu-btn" class="ml-2 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" aria-label="Toggle menu">
+          <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" x2="20" y1="12" y2="12"></line>
+            <line x1="4" x2="20" y1="6" y2="6"></line>
+            <line x1="4" x2="20" y1="18" y2="18"></line>
+          </svg>
+          <svg id="close-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 6 6 18"></path>
+            <path d="m6 6 12 12"></path>
+          </svg>
         </button>
       </div>
     </div>
   </div>
+
+  <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+    <div class="px-2 pt-2 pb-3 space-y-1">
+      {navItems.map((item) => (
+        <>
+          <a
+            href={item.href}
+            class="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md"
+          >
+            {item.name}
+          </a>
+          {item.children && (
+            <div class="pl-4 space-y-1">
+              {item.children.map((child) => (
+                <a
+                  href={child.href}
+                  class="block px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md"
+                >
+                  {child.name}
+                </a>
+              ))}
+            </div>
+          )}
+        </>
+      ))}
+    </div>
+  </div>
 </nav>
+
+<script>
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = document.getElementById('menu-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  mobileMenuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+    menuIcon.classList.toggle('hidden');
+    closeIcon.classList.toggle('hidden');
+  });
+</script>
