@@ -1,18 +1,20 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import CompanyBanner from '../components/CompanyBanner.astro';
+import NewsSection from '../components/NewsSection.astro';
+import ProjectsSection from '../components/ProjectsSection.astro';
+import LicenseSection from '../components/LicenseSection.astro';
+import ResourcesSection from '../components/ResourcesSection.astro';
+import SimulatorsSection from '../components/SimulatorsSection.astro';
 ---
 
-<BaseLayout title="Welcome to Astro">
-  <main>
-    <h1>Welcome to Astro</h1>
-  </main>
+<BaseLayout>
+  <Hero />
+  <CompanyBanner />
+  <NewsSection />
+  <ProjectsSection />
+  <LicenseSection />
+  <ResourcesSection />
+  <SimulatorsSection />
 </BaseLayout>
-
-<style>
-  main {
-    margin: auto;
-    padding: 1rem;
-    width: 800px;
-    max-width: calc(100% - 2rem);
-  }
-</style>
