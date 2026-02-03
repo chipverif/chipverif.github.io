@@ -1,0 +1,84 @@
+---
+import { Star, ExternalLink, BookOpen } from 'lucide-react';
+
+const projects = [
+  {
+    name: 'CoCoTB DPI',
+    description: 'Direct Programming Interface 库，无缝连接 Python 与 Verilog/VHDL',
+    stars: 156,
+    link: 'https://github.com/chipverif/cocotb-dpi',
+    docs: '/docs/cocotb-dpi',
+    icon: '🔗'
+  },
+  {
+    name: 'CoCoTB Driver',
+    description: '通用驱动框架，支持多种总线协议和接口',
+    stars: 89,
+    link: 'https://github.com/chipverif/cocotb-driver',
+    docs: '/docs/cocotb-driver',
+    icon: '🚗'
+  },
+  {
+    name: 'VIP Suite',
+    description: '多 VIP 仓库，集成常用验证 IP，加速开发流程',
+    stars: 234,
+    link: 'https://github.com/chipverif/vip-suite',
+    docs: '/docs/vip-suite',
+    icon: '📦'
+  },
+];
+---
+
+<section class="py-20 bg-gray-50 dark:bg-gray-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+        核心项目
+      </h2>
+      <p class="text-gray-600 dark:text-gray-300">
+        开源验证工具，助力加速芯片验证开发
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {projects.map((project) => (
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all border border-gray-200 dark:border-gray-700 hover:-translate-y-1">
+          <div class="flex items-start justify-between mb-4">
+            <div class="text-4xl mb-2">{project.icon}</div>
+            <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+              <Star class="w-4 h-4 mr-1 fill-yellow-400 text-yellow-400" />
+              {project.stars}
+            </div>
+          </div>
+
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+            {project.name}
+          </h3>
+
+          <p class="text-gray-600 dark:text-gray-300 mb-6">
+            {project.description}
+          </p>
+
+          <div class="flex gap-3">
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex-1 flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-colors"
+            >
+              <ExternalLink class="w-4 h-4 mr-2" />
+              GitHub
+            </a>
+            <a
+              href={project.docs}
+              class="flex-1 flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+            >
+              <BookOpen class="w-4 h-4 mr-2" />
+              文档
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
