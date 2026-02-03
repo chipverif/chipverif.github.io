@@ -46,7 +46,7 @@ const projects = [
           <div class="flex items-start justify-between mb-4">
             <div class="text-4xl mb-2">{project.icon}</div>
             <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
-              <Star class="w-4 h-4 mr-1 fill-yellow-400 text-yellow-400" />
+              <Star className="w-4 h-4 mr-1 fill-yellow-400 text-yellow-400" />
               {project.stars}
             </div>
           </div>
@@ -66,14 +66,14 @@ const projects = [
               rel="noopener noreferrer"
               class="flex-1 flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-colors"
             >
-              <ExternalLink class="w-4 h-4 mr-2" />
+              <ExternalLink className="w-4 h-4 mr-2" />
               GitHub
             </a>
             <a
               href={project.docs}
               class="flex-1 flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
             >
-              <BookOpen class="w-4 h-4 mr-2" />
+              <BookOpen className="w-4 h-4 mr-2" />
               文档
             </a>
           </div>
