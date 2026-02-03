@@ -1,0 +1,71 @@
+---
+import { ExternalLink } from 'lucide-react';
+
+const simulators = [
+  {
+    name: 'Verilator',
+    description: '高性能开源仿真器，支持 SystemVerilog 和 Verilog',
+    features: ['快速仿真', 'C++ 集成', '跨平台'],
+    link: 'https://verilator.org',
+    icon: '⚡'
+  },
+  {
+    name: 'Icarus Verilog',
+    description: '经典的 Verilog HDL 仿真器，广泛应用于学术和研究',
+    features: ['完整 Verilog 支持', '开源免费', '社区活跃'],
+    link: 'https://iverilog.icarus.com',
+    icon: '🔬'
+  },
+  {
+    name: 'Cocotb 集成',
+    description: '与 CoCoTB 无缝集成，使用 Python 进行验证',
+    features: ['Python 驱动', '灵活测试', '易于调试'],
+    link: '/docs/simulator-integration',
+    icon: '🐍'
+  },
+];
+---
+
+<section class="py-20 bg-gray-50 dark:bg-gray-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+        开源仿真器生态
+      </h2>
+      <p class="text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+        与 Verilator、Icarus Verilog 等主流开源仿真器完美集成，降低验证成本
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {simulators.map((sim) => (
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm hover:shadow-lg transition-all border border-gray-200 dark:border-gray-700">
+          <div class="text-4xl mb-4">{sim.icon}</div>
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+            {sim.name}
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300 mb-4">
+            {sim.description}
+          </p>
+          <ul class="space-y-2 mb-6">
+            {sim.features.map((feature) => (
+              <li class="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                <span class="w-1.5 h-1.5 rounded-full bg-indigo-600 dark:bg-indigo-400 mr-2"></span>
+                {feature}
+              </li>
+            ))}
+          </ul>
+          <a
+            href={sim.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center text-indigo-600 dark:text-indigo-400 font-medium hover:underline"
+          >
+            了解更多
+            <ExternalLink className="w-4 h-4 ml-2" />
+          </a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
