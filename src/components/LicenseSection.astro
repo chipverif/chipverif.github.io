@@ -1,0 +1,111 @@
+---
+<section class="py-20 bg-gradient-to-br from-indigo-600 to-purple-600 dark:from-indigo-900 dark:to-purple-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="text-white">
+        <h2 class="text-3xl font-bold mb-6">
+          申请免费 VIP License
+        </h2>
+        <p class="text-lg text-indigo-100 mb-8">
+          我们为个人开发者、学术研究和小型团队提供免费的 VIP License。
+          填写表单，我们的团队将在 1-2 个工作日内审核并回复。
+        </p>
+
+        <div class="space-y-4">
+          <div class="flex items-start gap-3">
+            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-sm font-bold">
+              ✓
+            </div>
+            <p class="text-indigo-100">完整的 VIP 功能访问权限</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-sm font-bold">
+              ✓
+            </div>
+            <p class="text-indigo-100">技术支持和更新服务</p>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="flex-shrink-0 w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-sm font-bold">
+              ✓
+            </div>
+            <p class="text-indigo-100">社区资源访问权限</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-2xl">
+        <form
+          action="https://formspree.io/f/YOUR_FORM_ID"
+          method="POST"
+          class="space-y-6"
+        >
+          <div>
+            <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              姓名
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+              placeholder="您的姓名"
+            />
+          </div>
+
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              邮箱
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+              placeholder="your@email.com"
+            />
+          </div>
+
+          <div>
+            <label for="company" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              公司/机构
+            </label>
+            <input
+              type="text"
+              id="company"
+              name="company"
+              class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+              placeholder="公司或机构名称"
+            />
+          </div>
+
+          <div>
+            <label for="project" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              项目说明
+            </label>
+            <textarea
+              id="project"
+              name="project"
+              rows="4"
+              required
+              class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+              placeholder="请简要描述您的项目和使用场景"
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full px-6 py-3 text-base font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-all shadow-lg hover:shadow-xl"
+          >
+            提交申请
+          </button>
+
+          <p class="text-xs text-center text-gray-500 dark:text-gray-400">
+            提交后我们将在 1-2 个工作日内审核并通过邮件回复
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
