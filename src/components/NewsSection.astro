@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import { ArrowRight } from 'lucide-react';
+
+const allNews = await getCollection('news');
+const featuredNews = allNews.filter(n => n.data.featured).slice(0, 3);
+const recentNews = allNews.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 6);
+---
+
+<section class="py-20 bg-white dark:bg-gray-800">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+        动态资讯
+      </h2>
+      <p class="text-gray-600 dark:text-gray-300">
+        CoCoTB、PyUVM、开源仿真器最新动态 + Chipverif 新闻
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {recentNews.map((item) => (
+        <article
+          class="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 hover:shadow-lg transition-all border border-gray-200 dark:border-gray-600"
+        >
+          <div class="flex items-center justify-between mb-3">
+            <span class="px-3 py-1 text-xs font-semibold rounded-full bg-indigo-100 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-300">
+              {item.data.category}
+            </span>
+            <time class="text-sm text-gray-500 dark:text-gray-400">
+              {item.data.date.toLocaleDateString('zh-CN')}
+            </time>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+            <a href={item.data.link || `/news/${item.id}`} class="hover:text-indigo-600 dark:hover:text-indigo-400">
+              {item.data.title}
+            </a>
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300 line-clamp-2">
+            {item.rendered?.html?.replace(/<[^>]*>?/gm, '').substring(0, 100)}...
+          </p>
+        </article>
+      ))}
+    </div>
+
+    <div class="text-center mt-10">
+      <a
+        href="/news"
+        class="inline-flex items-center px-6 py-3 text-base font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300"
+      >
+        查看全部动态
+        <ArrowRight className="ml-2 h-5 w-5" />
+      </a>
+    </div>
+  </div>
+</section>
