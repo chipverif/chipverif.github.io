@@ -2,17 +2,17 @@
 import ThemeToggle from './ThemeToggle.astro';
 
 const navItems = [
-  { name: '首页', href: '/' },
-  { name: '项目', href: '/projects' },
-  { name: '服务', href: '/services', children: [
-    { name: 'CoCoTB 教学', href: '/services/training' },
-    { name: '技术支持', href: '/services/support' },
-    { name: '定制 VIP', href: '/services/custom-vip' },
-    { name: '咨询服务', href: '/services/consulting' },
+  { name: 'Home', href: '/' },
+  { name: 'Projects', href: '/projects' },
+  { name: 'Services', href: '/services', children: [
+    { name: 'CoCoTB Training', href: '/services/training' },
+    { name: 'Technical Support', href: '/services/support' },
+    { name: 'Custom VIP', href: '/services/custom-vip' },
+    { name: 'Consulting', href: '/services/consulting' },
   ]},
-  { name: '新闻', href: '/news' },
-  { name: '文档', href: '/docs' },
-  { name: '联系我们', href: '/contact' },
+  { name: 'News', href: '/news' },
+  { name: 'Docs', href: '/docs' },
+  { name: 'Contact', href: '/contact' },
 ];
 ---
 
@@ -43,6 +43,7 @@ const navItems = [
                     <a
                       href={child.href}
                       class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                      key={child.name}
                     >
                       {child.name}
                     </a>
@@ -87,6 +88,7 @@ const navItems = [
               <a
                 href={item.href}
                 class="block px-4 py-4 text-lg font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                key={item.name}
               >
                 {item.name}
               </a>
@@ -96,6 +98,7 @@ const navItems = [
                     <a
                       href={child.href}
                       class="block px-4 py-3 text-base text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                      key={child.name}
                     >
                       {child.name}
                     </a>
@@ -111,51 +114,46 @@ const navItems = [
 </nav>
 
 <script>
-  const mobileMenuBtn = document.querySelector('[data-mobile-menu-btn]');
   const mobileMenu = document.getElementById('mobile-menu');
-  const mobileCloseBtn = document.getElementById('mobile-close-btn');
+  const menuBtns = document.querySelectorAll('[data-mobile-menu-btn]');
+  const closeBtn = document.getElementById('mobile-close-btn');
   const menuIcon = document.querySelector('[data-menu-icon]');
   const closeIcon = document.querySelector('[data-close-icon]');
 
-  let isMobileMenuOpen = false;
-
-  function openMobileMenu() {
-    isMobileMenuOpen = true;
-    mobileMenu?.classList.remove('invisible', 'opacity-0');
-    mobileMenu?.classList.add('visible', 'opacity-100');
-    menuIcon?.classList.add('hidden');
-    closeIcon?.classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
+  function toggleMenu() {
+    mobileMenu.classList.toggle('opacity-0');
+    mobileMenu.classList.toggle('invisible');
+    mobileMenu.classList.toggle('translate-x-full');
+    menuIcon.classList.toggle('hidden');
+    closeIcon.classList.toggle('hidden');
+    document.body.classList.toggle('overflow-hidden');
   }
 
-  function closeMobileMenu() {
-    isMobileMenuOpen = false;
-    mobileMenu?.classList.add('invisible', 'opacity-0');
-    mobileMenu?.classList.remove('visible', 'opacity-100');
-    menuIcon?.classList.remove('hidden');
-    closeIcon?.classList.add('hidden');
-    document.body.style.overflow = '';
-  }
-
-  mobileMenuBtn?.addEventListener('click', () => {
-    if (isMobileMenuOpen) {
-      closeMobileMenu();
-    } else {
-      openMobileMenu();
-    }
+  menuBtns.forEach(btn => {
+    btn.addEventListener('click', toggleMenu);
   });
 
-  mobileCloseBtn?.addEventListener('click', closeMobileMenu);
+  closeBtn.addEventListener('click', toggleMenu);
 
-  mobileMenu?.addEventListener('click', (e) => {
-    if (e.target === mobileMenu) {
-      closeMobileMenu();
+  document.addEventListener('click', (e) => {
+    if (!mobileMenu.contains(e.target)) {
+      mobileMenu.classList.add('opacity-0');
+      mobileMenu.classList.add('invisible');
+      mobileMenu.classList.add('translate-x-full');
+      menuIcon.classList.remove('hidden');
+      closeIcon.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
     }
   });
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && isMobileMenuOpen) {
-      closeMobileMenu();
+    if (e.key === 'Escape') {
+      mobileMenu.classList.add('opacity-0');
+      mobileMenu.classList.add('invisible');
+      mobileMenu.classList.add('translate-x-full');
+      menuIcon.classList.remove('hidden');
+      closeIcon.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
     }
   });
 </script>
