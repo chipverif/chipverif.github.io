@@ -1,0 +1,65 @@
+---
+import { getCollection } from 'astro:content';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+
+const allNews = await getCollection('news');
+const recentNews = allNews.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 5);
+---
+
+<style>
+  .ticker-wrap {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .ticker-move {
+    display: inline-block;
+    animation: ticker 30s linear infinite;
+  }
+
+  .ticker-move:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes ticker {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(-100%, 0, 0);
+    }
+  }
+
+  .ticker-item {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 2rem;
+  }
+</style>
+
+<div class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-3 overflow-hidden">
+  <div class="ticker-wrap">
+    <div class="ticker-move">
+      <div class="flex items-center">
+        {recentNews.map((item) => (
+          <div class="ticker-item" key={item.id}>
+            <span class="px-3 py-1 bg-white/20 rounded-full text-xs font-semibold mr-2">
+              {item.data.category}
+            </span>
+            <a
+              href={item.data.link || `/news/${item.id}`}
+              class="hover:underline font-medium"
+            >
+              {item.data.title}
+            </a>
+            <span class="mx-4 opacity-50">•</span>
+          </div>
+        ))}
+
+        <span class="ml-8 text-sm opacity-70">→ 访问新闻中心</span>
+        <ChevronRight className="w-4 h-4 inline-block ml-1" />
+      </div>
+    </div>
+  </div>
+</div>

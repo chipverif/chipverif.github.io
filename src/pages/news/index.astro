@@ -1,18 +1,48 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
 
-const { title = '新闻' } = Astro.props;
+const allNews = await getCollection('news');
+const recentNews = allNews.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
-<BaseLayout title={title}>
-  <section class="py-20">
+<BaseLayout title="新闻动态">
+  <div class="pt-12 pb-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-        新闻
-      </h1>
-      <p class="text-gray-600 dark:text-gray-300">
-        页面建设中...
-      </p>
+      <div class="text-center mb-16">
+        <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          动态资讯
+        </h1>
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          CoCoTB、PyUVM、开源仿真器最新动态 + Chipverif 新闻
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {recentNews.map((item) => (
+          <article
+            class="bg-white dark:bg-gray-800 rounded-xl p-6 hover:shadow-lg transition-all border border-gray-200 dark:border-gray-700"
+            key={item.id}
+          >
+            <div class="flex items-center justify-between mb-3">
+              <span class="px-3 py-1 text-xs font-semibold rounded-full bg-indigo-100 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-300">
+                {item.data.category}
+              </span>
+              <time class="text-sm text-gray-500 dark:text-gray-400">
+                {item.data.date.toLocaleDateString('zh-CN')}
+              </time>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+              <a href={item.data.link || `/news/${item.id}`} class="hover:text-indigo-600 dark:hover:text-indigo-400">
+                {item.data.title}
+              </a>
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300 line-clamp-2">
+              {item.rendered?.html?.replace(/<[^>]*>?/gm, '').substring(0, 100)}...
+            </p>
+          </article>
+        ))}
+      </div>
     </div>
-  </section>
+  </div>
 </BaseLayout>
