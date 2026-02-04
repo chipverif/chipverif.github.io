@@ -1,18 +1,197 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-
-const { title = '联系我们' } = Astro.props;
+import { Mail, MessageSquare, MapPin, Github, Twitter, Linkedin } from 'lucide-react';
 ---
 
-<BaseLayout title={title}>
-  <section class="py-20">
+<BaseLayout title="Contact Us">
+  <div class="pt-12 pb-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-        联系我们
-      </h1>
-      <p class="text-gray-600 dark:text-gray-300">
-        页面建设中...
-      </p>
+      <div class="text-center mb-16">
+        <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          Contact Us
+        </h1>
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          Get in touch with our team for any questions or support
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+        <div>
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+            Get in Touch
+          </h2>
+          <form
+            action="https://formspree.io/f/YOUR_FORM_ID"
+            method="POST"
+            class="space-y-6"
+          >
+            <div>
+              <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+                placeholder="Your name"
+              />
+            </div>
+
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+                placeholder="your@email.com"
+              />
+            </div>
+
+            <div>
+              <label for="subject" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Subject
+              </label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                required
+                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+                placeholder="How can we help you?"
+              />
+            </div>
+
+            <div>
+              <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Message
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows="6"
+                required
+                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-700 dark:text-white"
+                placeholder="Your message..."
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full px-6 py-3 text-base font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-all shadow-lg hover:shadow-xl"
+            >
+              Send Message
+            </button>
+          </form>
+        </div>
+
+        <div>
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+            Contact Information
+          </h2>
+          <div class="space-y-6">
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-indigo-100 dark:bg-indigo-900 rounded-lg flex items-center justify-center">
+                <Mail className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900 dark:text-white mb-1">
+                  Email
+                </h3>
+                <a
+                  href="mailto:opensource@chipverif.com"
+                  className="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400"
+                >
+                  opensource@chipverif.com
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center">
+                <Github className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900 dark:text-white mb-1">
+                  GitHub
+                </h3>
+                <a
+                  href="https://github.com/chipverif"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-gray-600 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400"
+                >
+                  github.com/chipverif
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center">
+                <MessageSquare className="w-6 h-6 text-green-600 dark:text-green-400" />
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900 dark:text-white mb-1">
+                  Support
+                </h3>
+                <p class="text-gray-600 dark:text-gray-300">
+                  Technical support available for open-source users
+                </p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-4">
+              <div className="flex-shrink-0 w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
+                <MapPin className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900 dark:text-white mb-1">
+                  Community
+                </h3>
+                <p class="text-gray-600 dark:text-gray-300">
+                  Join our community for discussions and updates
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-8">
+            <h3 class="font-semibold text-gray-900 dark:text-white mb-4">
+              Follow Us
+            </h3>
+            <div class="flex gap-4">
+               <a
+                  href="https://github.com/chipverif"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 bg-gray-900 dark:bg-gray-800 rounded-lg text-white hover:bg-gray-700 dark:hover:bg-gray-700 transition-colors"
+                  aria-label="GitHub"
+                >
+                  <Github className="w-6 h-6" />
+                </a>
+                <a
+                  href="#"
+                  className="p-3 bg-gray-900 dark:bg-gray-800 rounded-lg text-white hover:bg-gray-700 dark:hover:bg-gray-700 transition-colors"
+                  aria-label="Twitter"
+                >
+                  <Twitter className="w-6 h-6" />
+                </a>
+                <a
+                  href="#"
+                  className="p-3 bg-gray-900 dark:bg-gray-800 rounded-lg text-white hover:bg-gray-700 dark:hover:bg-gray-700 transition-colors"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin className="w-6 h-6" />
+                </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </section>
+  </div>
 </BaseLayout>

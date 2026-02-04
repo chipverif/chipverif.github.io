@@ -29,7 +29,7 @@ const recentNews = allNews.sort((a, b) => b.data.date.valueOf() - a.data.date.va
                 {item.data.category}
               </span>
               <time class="text-sm text-gray-500 dark:text-gray-400">
-                {item.data.date.toLocaleDateString('zh-CN')}
+                {item.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
               </time>
             </div>
             <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
