@@ -22,6 +22,7 @@ interface Project {
   status: Status;
   version?: string;
   lastUpdated?: string;
+  category: 'cocotb' | 'commercial';
 }
 
 const statusColors: Record<Status, string> = {
@@ -48,7 +49,8 @@ const projects: Project[] = [
     icon: '🔗',
     technologies: ['Python', 'Verilog', 'VHDL'],
     status: 'Active',
-    version: 'v2.1.0'
+    version: 'v2.1.0',
+    category: 'cocotb'
   },
   {
     name: 'CoCoTB Driver',
@@ -59,172 +61,395 @@ const projects: Project[] = [
     icon: '🚗',
     technologies: ['Python', 'SystemVerilog'],
     status: 'Maintenance',
-    lastUpdated: '2024-01-15'
+    lastUpdated: '2024-01-15',
+    category: 'cocotb'
   },
   {
-    name: 'VIP Suite',
-    description: 'Multi-VIP repository integrating common verification IPs to accelerate development',
-    stars: 234,
-    link: 'https://github.com/chipverif/vip-suite',
-    docs: '/docs/vip-suite',
-    icon: '📦',
+    name: 'AXI VIP',
+    description: 'Complete AXI4 interface verification IP with master, slave, and monitor components',
+    stars: 312,
+    link: '/docs/axi-vip',
+    docs: '/docs/axi-vip',
+    icon: '🎯',
     technologies: ['SystemVerilog', 'UVM'],
     status: 'Stable',
-    version: 'v3.0.0'
+    version: 'v4.2.0',
+    category: 'commercial'
+  },
+  {
+    name: 'APB VIP',
+    description: 'APB bus verification IP supporting APB3 and APB4 protocols with full coverage',
+    stars: 198,
+    link: '/docs/apb-vip',
+    docs: '/docs/apb-vip',
+    icon: '📌',
+    technologies: ['SystemVerilog', 'UVM'],
+    status: 'Stable',
+    version: 'v3.1.0',
+    category: 'commercial'
+  },
+  {
+    name: 'I2C VIP',
+    description: 'I2C master and slave verification IP with multi-master support and full protocol coverage',
+    stars: 245,
+    link: '/docs/i2c-vip',
+    docs: '/docs/i2c-vip',
+    icon: '🔌',
+    technologies: ['SystemVerilog', 'UVM'],
+    status: 'Stable',
+    version: 'v2.8.0',
+    category: 'commercial'
+  },
+  {
+    name: 'SPI VIP',
+    description: 'SPI verification IP supporting standard SPI, dual SPI, and quad SPI modes',
+    stars: 189,
+    link: '/docs/spi-vip',
+    docs: '/docs/spi-vip',
+    icon: '💫',
+    technologies: ['SystemVerilog', 'UVM'],
+    status: 'Stable',
+    version: 'v2.5.0',
+    category: 'commercial'
+  },
+  {
+    name: 'UART VIP',
+    description: 'UART verification IP supporting standard baud rates with configurable data format',
+    stars: 167,
+    link: '/docs/uart-vip',
+    docs: '/docs/uart-vip',
+    icon: '📻',
+    technologies: ['SystemVerilog', 'UVM'],
+    status: 'Stable',
+    version: 'v2.3.0',
+    category: 'commercial'
   },
 ];
+
+const cocotbProjects = projects.filter(p => p.category === 'cocotb');
+const commercialVIPs = projects.filter(p => p.category === 'commercial');
 ---
 
 {showSection ? (
   <section class="py-24 bg-gray-50 dark:bg-gray-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {showHeader && (
-        <div class="text-center mb-12">
+        <div class="text-center mb-16">
           <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
             Core Projects
           </h2>
           <p class="text-gray-600 dark:text-gray-300">
-            Open-source verification tools accelerating chip verification development
+            Professional verification tools accelerating chip verification development
           </p>
         </div>
       )}
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {projects.map((project) => (
-        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all border border-gray-200 dark:border-gray-700 hover:-translate-y-1">
-          <div class="flex items-start justify-between mb-4">
-            <div class="text-4xl mb-2">{project.icon}</div>
-            <div class="flex items-center gap-2">
-              <span class={`px-3 py-1 text-xs font-semibold rounded-full ${statusColors[project.status]}`}>
-                {project.status}
-              </span>
-              <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                <Star className="w-4 h-4 mr-1 fill-yellow-400 text-yellow-400" />
-                {project.stars}
+      <div class="mb-20">
+        <div class="mb-8">
+          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+            <span class="text-3xl">🐍</span>
+            CoCoTB Platform
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300 max-w-3xl">
+            Python-based testbench framework and VIP development tools. Build powerful verification environments and create reusable VIPs with Python's flexibility.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {cocotbProjects.map((project) => (
+            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all border border-gray-200 dark:border-gray-700 hover:-translate-y-1">
+              <div class="flex items-start justify-between mb-4">
+                <div class="text-4xl mb-2">{project.icon}</div>
+                <div class="flex items-center gap-2">
+                  <span class={`px-3 py-1 text-xs font-semibold rounded-full ${statusColors[project.status]}`}>
+                    {project.status}
+                  </span>
+                  <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                    <Star className="w-4 h-4 mr-1 fill-yellow-400 text-yellow-400" />
+                    {project.stars}
+                  </div>
+                </div>
+              </div>
+
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                {project.name}
+              </h3>
+
+              <p class="text-gray-600 dark:text-gray-300 mb-4">
+                {project.description}
+              </p>
+
+              <div class="flex flex-wrap gap-2 mb-4">
+                {project.technologies.map((tech) => (
+                  <span class={`px-2.5 py-0.5 text-xs font-medium rounded-md ${techColors[tech] || 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200'}`}>
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              <div class="text-xs text-gray-500 dark:text-gray-400 mb-4">
+                {project.version ? (
+                  <span>Version: {project.version}</span>
+                ) : (
+                  <span>Last Updated: {project.lastUpdated}</span>
+                )}
+              </div>
+
+              <div class="flex gap-3">
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex-1 flex items-center justify-center px-4 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all shadow-md hover:shadow-lg"
+                >
+                  <ExternalLink className="w-4 h-4 mr-2" />
+                  GitHub
+                </a>
+                <a
+                  href={project.docs}
+                  class="flex-1 flex items-center justify-center px-4 py-2.5 text-sm font-semibold text-gray-700 dark:text-gray-300 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800 rounded-lg hover:from-gray-100 hover:to-gray-200 dark:hover:from-gray-600 dark:hover:to-gray-700 transition-all border border-gray-200 dark:border-gray-600"
+                >
+                  <BookOpen className="w-4 h-4 mr-2" />
+                  Documentation
+                </a>
               </div>
             </div>
-          </div>
+          ))}
+        </div>
+      </div>
 
-          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
-            {project.name}
+      <div class="mb-20">
+        <div class="mb-8">
+          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+            <span class="text-3xl">💎</span>
+            Commercial VIPs
           </h3>
-
-          <p class="text-gray-600 dark:text-gray-300 mb-4">
-            {project.description}
+          <p class="text-gray-600 dark:text-gray-300 max-w-3xl">
+            Professional verification IPs available for free use. Proprietary codebase with comprehensive documentation and support.
           </p>
-
-          <div class="flex flex-wrap gap-2 mb-4">
-            {project.technologies.map((tech) => (
-              <span class={`px-2.5 py-0.5 text-xs font-medium rounded-md ${techColors[tech] || 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200'}`}>
-                {tech}
-              </span>
-            ))}
-          </div>
-
-          <div class="text-xs text-gray-500 dark:text-gray-400 mb-4">
-            {project.version ? (
-              <span>Version: {project.version}</span>
-            ) : (
-              <span>Last Updated: {project.lastUpdated}</span>
-            )}
-          </div>
-
-          <div class="flex gap-3">
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="flex-1 flex items-center justify-center px-4 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all shadow-md hover:shadow-lg"
-            >
-              <ExternalLink className="w-4 h-4 mr-2" />
-              GitHub
-            </a>
-            <a
-              href={project.docs}
-              class="flex-1 flex items-center justify-center px-4 py-2.5 text-sm font-semibold text-gray-700 dark:text-gray-300 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800 rounded-lg hover:from-gray-100 hover:to-gray-200 dark:hover:from-gray-600 dark:hover:to-gray-700 transition-all border border-gray-200 dark:border-gray-600"
-            >
-              <BookOpen className="w-4 h-4 mr-2" />
-              Documentation
-            </a>
+          <div class="flex items-center gap-2 mt-3">
+            <span class="px-3 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+              Free to Use
+            </span>
+            <span class="px-3 py-1 text-xs font-semibold rounded-full bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+              Closed Source
+            </span>
           </div>
         </div>
-        ))}
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {commercialVIPs.map((project) => (
+            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all border border-gray-200 dark:border-gray-700 hover:-translate-y-1">
+              <div class="flex items-start justify-between mb-4">
+                <div class="text-4xl mb-2">{project.icon}</div>
+                <div class="flex items-center gap-2">
+                  <span class={`px-3 py-1 text-xs font-semibold rounded-full ${statusColors[project.status]}`}>
+                    {project.status}
+                  </span>
+                  <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                    <Star className="w-4 h-4 mr-1 fill-yellow-400 text-yellow-400" />
+                    {project.stars}
+                  </div>
+                </div>
+              </div>
+
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                {project.name}
+              </h3>
+
+              <p class="text-gray-600 dark:text-gray-300 mb-4">
+                {project.description}
+              </p>
+
+              <div class="flex flex-wrap gap-2 mb-4">
+                {project.technologies.map((tech) => (
+                  <span class={`px-2.5 py-0.5 text-xs font-medium rounded-md ${techColors[tech] || 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200'}`}>
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              <div class="text-xs text-gray-500 dark:text-gray-400 mb-4">
+                {project.version ? (
+                  <span>Version: {project.version}</span>
+                ) : (
+                  <span>Last Updated: {project.lastUpdated}</span>
+                )}
+              </div>
+
+              <div class="flex gap-3">
+                <a
+                  href={project.link}
+                  class="flex-1 flex items-center justify-center px-4 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-cyan-600 rounded-lg hover:from-blue-700 hover:to-cyan-700 transition-all shadow-md hover:shadow-lg"
+                >
+                  <BookOpen className="w-4 h-4 mr-2" />
+                  Documentation
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   </section>
 ) : (
   <>
     {showHeader && (
-      <div class="text-center mb-12">
+      <div class="text-center mb-16">
         <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
           Core Projects
         </h2>
         <p class="text-gray-600 dark:text-gray-300">
-          Open-source verification tools accelerating chip verification development
+          Professional verification tools accelerating chip verification development
         </p>
       </div>
     )}
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {projects.map((project) => (
-        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all border border-gray-200 dark:border-gray-700 hover:-translate-y-1">
-          <div class="flex items-start justify-between mb-4">
-            <div class="text-4xl mb-2">{project.icon}</div>
-            <div class="flex items-center gap-2">
-              <span class={`px-3 py-1 text-xs font-semibold rounded-full ${statusColors[project.status]}`}>
-                {project.status}
-              </span>
-              <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                <Star className="w-4 h-4 mr-1 fill-yellow-400 text-yellow-400" />
-                {project.stars}
+    <div class="mb-20">
+      <div class="mb-8">
+        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+          <span class="text-3xl">🐍</span>
+          CoCoTB Platform
+        </h3>
+        <p class="text-gray-600 dark:text-gray-300 max-w-3xl">
+          Python-based testbench framework and VIP development tools. Build powerful verification environments and create reusable VIPs with Python's flexibility.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {cocotbProjects.map((project) => (
+          <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all border border-gray-200 dark:border-gray-700 hover:-translate-y-1">
+            <div class="flex items-start justify-between mb-4">
+              <div class="text-4xl mb-2">{project.icon}</div>
+              <div class="flex items-center gap-2">
+                <span class={`px-3 py-1 text-xs font-semibold rounded-full ${statusColors[project.status]}`}>
+                  {project.status}
+                </span>
+                <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                  <Star className="w-4 h-4 mr-1 fill-yellow-400 text-yellow-400" />
+                  {project.stars}
+                </div>
               </div>
             </div>
+
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+              {project.name}
+            </h3>
+
+            <p class="text-gray-600 dark:text-gray-300 mb-4">
+              {project.description}
+            </p>
+
+            <div class="flex flex-wrap gap-2 mb-4">
+              {project.technologies.map((tech) => (
+                <span class={`px-2.5 py-0.5 text-xs font-medium rounded-md ${techColors[tech] || 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200'}`}>
+                  {tech}
+                </span>
+              ))}
+            </div>
+
+            <div class="text-xs text-gray-500 dark:text-gray-400 mb-4">
+              {project.version ? (
+                <span>Version: {project.version}</span>
+              ) : (
+                <span>Last Updated: {project.lastUpdated}</span>
+              )}
+            </div>
+
+            <div class="flex gap-3">
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex-1 flex items-center justify-center px-4 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all shadow-md hover:shadow-lg"
+              >
+                <ExternalLink className="w-4 h-4 mr-2" />
+                GitHub
+              </a>
+              <a
+                href={project.docs}
+                class="flex-1 flex items-center justify-center px-4 py-2.5 text-sm font-semibold text-gray-700 dark:text-gray-300 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800 rounded-lg hover:from-gray-100 hover:to-gray-200 dark:hover:from-gray-600 dark:hover:to-gray-700 transition-all border border-gray-200 dark:border-gray-600"
+              >
+                <BookOpen className="w-4 h-4 mr-2" />
+                Documentation
+              </a>
+            </div>
           </div>
+        ))}
+      </div>
+    </div>
 
-          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
-            {project.name}
-          </h3>
-
-          <p class="text-gray-600 dark:text-gray-300 mb-4">
-            {project.description}
-          </p>
-
-          <div class="flex flex-wrap gap-2 mb-4">
-            {project.technologies.map((tech) => (
-              <span class={`px-2.5 py-0.5 text-xs font-medium rounded-md ${techColors[tech] || 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200'}`}>
-                {tech}
-              </span>
-            ))}
-          </div>
-
-          <div class="text-xs text-gray-500 dark:text-gray-400 mb-4">
-            {project.version ? (
-              <span>Version: {project.version}</span>
-            ) : (
-              <span>Last Updated: {project.lastUpdated}</span>
-            )}
-          </div>
-
-          <div class="flex gap-3">
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="flex-1 flex items-center justify-center px-4 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all shadow-md hover:shadow-lg"
-            >
-              <ExternalLink className="w-4 h-4 mr-2" />
-              GitHub
-            </a>
-            <a
-              href={project.docs}
-              class="flex-1 flex items-center justify-center px-4 py-2.5 text-sm font-semibold text-gray-700 dark:text-gray-300 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800 rounded-lg hover:from-gray-100 hover:to-gray-200 dark:hover:from-gray-600 dark:hover:to-gray-700 transition-all border border-gray-200 dark:border-gray-600"
-            >
-              <BookOpen className="w-4 h-4 mr-2" />
-              Documentation
-            </a>
-          </div>
+    <div class="mb-20">
+      <div class="mb-8">
+        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+          <span class="text-3xl">💎</span>
+          Commercial VIPs
+        </h3>
+        <p class="text-gray-600 dark:text-gray-300 max-w-3xl">
+          Professional verification IPs available for free use. Proprietary codebase with comprehensive documentation and support.
+        </p>
+        <div class="flex items-center gap-2 mt-3">
+          <span class="px-3 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+            Free to Use
+          </span>
+          <span class="px-3 py-1 text-xs font-semibold rounded-full bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200">
+            Closed Source
+          </span>
         </div>
-      ))}
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {commercialVIPs.map((project) => (
+          <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all border border-gray-200 dark:border-gray-700 hover:-translate-y-1">
+            <div class="flex items-start justify-between mb-4">
+              <div class="text-4xl mb-2">{project.icon}</div>
+              <div class="flex items-center gap-2">
+                <span class={`px-3 py-1 text-xs font-semibold rounded-full ${statusColors[project.status]}`}>
+                  {project.status}
+                </span>
+                <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                  <Star className="w-4 h-4 mr-1 fill-yellow-400 text-yellow-400" />
+                  {project.stars}
+                </div>
+              </div>
+            </div>
+
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+              {project.name}
+            </h3>
+
+            <p class="text-gray-600 dark:text-gray-300 mb-4">
+              {project.description}
+            </p>
+
+            <div class="flex flex-wrap gap-2 mb-4">
+              {project.technologies.map((tech) => (
+                <span class={`px-2.5 py-0.5 text-xs font-medium rounded-md ${techColors[tech] || 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200'}`}>
+                  {tech}
+                </span>
+              ))}
+            </div>
+
+            <div class="text-xs text-gray-500 dark:text-gray-400 mb-4">
+              {project.version ? (
+                <span>Version: {project.version}</span>
+              ) : (
+                <span>Last Updated: {project.lastUpdated}</span>
+              )}
+            </div>
+
+            <div class="flex gap-3">
+              <a
+                href={project.link}
+                class="flex-1 flex items-center justify-center px-4 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-blue-600 to-cyan-600 rounded-lg hover:from-blue-700 hover:to-cyan-700 transition-all shadow-md hover:shadow-lg"
+              >
+                <BookOpen className="w-4 h-4 mr-2" />
+                Documentation
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   </>
 )}
