@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LicenseSection from '../components/LicenseSection.astro';
+---
+
+<BaseLayout title="申请免费 VIP License">
+  <div class="pt-12 pb-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          申请免费 VIP License
+        </h1>
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          我们为个人开发者、学术研究和小型团队提供免费的 VIP License。
+          填写表单，我们的团队将在 1-2 个工作日内审核并回复。
+        </p>
+      </div>
+
+      <LicenseSection />
+    </div>
+  </div>
+</BaseLayout>

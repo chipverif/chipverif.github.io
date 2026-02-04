@@ -4,7 +4,6 @@ import Hero from '../components/Hero.astro';
 import CompanyBanner from '../components/CompanyBanner.astro';
 import NewsSection from '../components/NewsSection.astro';
 import ProjectsSection from '../components/ProjectsSection.astro';
-import LicenseSection from '../components/LicenseSection.astro';
 import ResourcesSection from '../components/ResourcesSection.astro';
 import SimulatorsSection from '../components/SimulatorsSection.astro';
 ---
@@ -12,9 +11,9 @@ import SimulatorsSection from '../components/SimulatorsSection.astro';
 <BaseLayout>
   <Hero />
   <CompanyBanner />
-  
+
   <div class="border-b border-gray-200 dark:border-gray-800"></div>
-  
+
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
     <div class="py-24 bg-white dark:bg-gray-800">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -27,12 +26,10 @@ import SimulatorsSection from '../components/SimulatorsSection.astro';
       </div>
     </div>
   </div>
-  
-  <LicenseSection />
-  
+
   <div class="border-b border-gray-200 dark:border-gray-800"></div>
-  
+
   <ResourcesSection />
-  
+
   <SimulatorsSection />
 </BaseLayout>
