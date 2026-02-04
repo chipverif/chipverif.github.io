@@ -72,30 +72,40 @@ const navItems = [
     </div>
   </div>
 
-  <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
-    <div class="px-2 pt-2 pb-3 space-y-1">
-      {navItems.map((item) => (
-        <>
-          <a
-            href={item.href}
-            class="block px-3 py-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md"
-          >
-            {item.name}
-          </a>
-          {item.children && (
-            <div class="pl-4 space-y-1">
-              {item.children.map((child) => (
-                <a
-                  href={child.href}
-                  class="block px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md"
-                >
-                  {child.name}
-                </a>
-              ))}
-            </div>
-          )}
-        </>
-      ))}
+  <div id="mobile-menu" class="fixed inset-0 md:hidden bg-white/95 dark:bg-gray-900/95 backdrop-blur-md z-50 opacity-0 invisible transition-all duration-300">
+    <div class="relative h-full flex flex-col">
+      <button id="mobile-close-btn" class="absolute top-4 right-4 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" aria-label="Close menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 6 6 18"></path>
+          <path d="m6 6 12 12"></path>
+        </svg>
+      </button>
+      <div class="flex-1 flex items-center justify-center px-4">
+        <nav class="w-full max-w-md space-y-2">
+          {navItems.map((item) => (
+            <>
+              <a
+                href={item.href}
+                class="block px-4 py-4 text-lg font-medium text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+              >
+                {item.name}
+              </a>
+              {item.children && (
+                <div class="pl-6 space-y-2">
+                  {item.children.map((child) => (
+                    <a
+                      href={child.href}
+                      class="block px-4 py-3 text-base text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                    >
+                      {child.name}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </>
+          ))}
+        </nav>
+      </div>
     </div>
   </div>
 </nav>
@@ -103,12 +113,49 @@ const navItems = [
 <script>
   const mobileMenuBtn = document.querySelector('[data-mobile-menu-btn]');
   const mobileMenu = document.getElementById('mobile-menu');
+  const mobileCloseBtn = document.getElementById('mobile-close-btn');
   const menuIcon = document.querySelector('[data-menu-icon]');
   const closeIcon = document.querySelector('[data-close-icon]');
 
+  let isMobileMenuOpen = false;
+
+  function openMobileMenu() {
+    isMobileMenuOpen = true;
+    mobileMenu?.classList.remove('invisible', 'opacity-0');
+    mobileMenu?.classList.add('visible', 'opacity-100');
+    menuIcon?.classList.add('hidden');
+    closeIcon?.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMobileMenu() {
+    isMobileMenuOpen = false;
+    mobileMenu?.classList.add('invisible', 'opacity-0');
+    mobileMenu?.classList.remove('visible', 'opacity-100');
+    menuIcon?.classList.remove('hidden');
+    closeIcon?.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
   mobileMenuBtn?.addEventListener('click', () => {
-    mobileMenu?.classList.toggle('hidden');
-    menuIcon?.classList.toggle('hidden');
-    closeIcon?.classList.toggle('hidden');
+    if (isMobileMenuOpen) {
+      closeMobileMenu();
+    } else {
+      openMobileMenu();
+    }
+  });
+
+  mobileCloseBtn?.addEventListener('click', closeMobileMenu);
+
+  mobileMenu?.addEventListener('click', (e) => {
+    if (e.target === mobileMenu) {
+      closeMobileMenu();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isMobileMenuOpen) {
+      closeMobileMenu();
+    }
   });
 </script>
