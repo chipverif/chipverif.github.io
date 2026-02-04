@@ -6,16 +6,49 @@ interface Props {
   showHeader?: boolean;
 }
 
+type Status = 'Active' | 'Maintenance' | 'Stable';
+type Technology = 'Python' | 'Verilog' | 'SystemVerilog' | 'VHDL' | 'UVM';
+
 const { showSection = true, showHeader = true } = Astro.props;
 
-const projects = [
+interface Project {
+  name: string;
+  description: string;
+  stars: number;
+  link: string;
+  docs: string;
+  icon: string;
+  technologies: Technology[];
+  status: Status;
+  version?: string;
+  lastUpdated?: string;
+}
+
+const statusColors: Record<Status, string> = {
+  Active: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200',
+  Maintenance: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
+  Stable: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
+};
+
+const techColors: Record<Technology, string> = {
+  'Python': 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-200',
+  'Verilog': 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200',
+  'SystemVerilog': 'bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200',
+  'VHDL': 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200',
+  'UVM': 'bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200'
+};
+
+const projects: Project[] = [
   {
     name: 'CoCoTB DPI',
     description: 'Direct Programming Interface 库，无缝连接 Python 与 Verilog/VHDL',
     stars: 156,
     link: 'https://github.com/chipverif/cocotb-dpi',
     docs: '/docs/cocotb-dpi',
-    icon: '🔗'
+    icon: '🔗',
+    technologies: ['Python', 'Verilog', 'VHDL'],
+    status: 'Active',
+    version: 'v2.1.0'
   },
   {
     name: 'CoCoTB Driver',
@@ -23,7 +56,10 @@ const projects = [
     stars: 89,
     link: 'https://github.com/chipverif/cocotb-driver',
     docs: '/docs/cocotb-driver',
-    icon: '🚗'
+    icon: '🚗',
+    technologies: ['Python', 'SystemVerilog'],
+    status: 'Maintenance',
+    lastUpdated: '2024-01-15'
   },
   {
     name: 'VIP Suite',
@@ -31,7 +67,10 @@ const projects = [
     stars: 234,
     link: 'https://github.com/chipverif/vip-suite',
     docs: '/docs/vip-suite',
-    icon: '📦'
+    icon: '📦',
+    technologies: ['SystemVerilog', 'UVM'],
+    status: 'Stable',
+    version: 'v3.0.0'
   },
 ];
 ---
@@ -55,9 +94,14 @@ const projects = [
         <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all border border-gray-200 dark:border-gray-700 hover:-translate-y-1">
           <div class="flex items-start justify-between mb-4">
             <div class="text-4xl mb-2">{project.icon}</div>
-            <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
-              <Star className="w-4 h-4 mr-1 fill-yellow-400 text-yellow-400" />
-              {project.stars}
+            <div class="flex items-center gap-2">
+              <span class={`px-3 py-1 text-xs font-semibold rounded-full ${statusColors[project.status]}`}>
+                {project.status}
+              </span>
+              <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                <Star className="w-4 h-4 mr-1 fill-yellow-400 text-yellow-400" />
+                {project.stars}
+              </div>
             </div>
           </div>
 
@@ -65,23 +109,39 @@ const projects = [
             {project.name}
           </h3>
 
-          <p class="text-gray-600 dark:text-gray-300 mb-6">
+          <p class="text-gray-600 dark:text-gray-300 mb-4">
             {project.description}
           </p>
+
+          <div class="flex flex-wrap gap-2 mb-4">
+            {project.technologies.map((tech) => (
+              <span class={`px-2.5 py-0.5 text-xs font-medium rounded-md ${techColors[tech] || 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200'}`}>
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          <div class="text-xs text-gray-500 dark:text-gray-400 mb-4">
+            {project.version ? (
+              <span>Version: {project.version}</span>
+            ) : (
+              <span>Last Updated: {project.lastUpdated}</span>
+            )}
+          </div>
 
           <div class="flex gap-3">
             <a
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              class="flex-1 flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-colors"
+              class="flex-1 flex items-center justify-center px-4 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all shadow-md hover:shadow-lg"
             >
               <ExternalLink className="w-4 h-4 mr-2" />
               GitHub
             </a>
             <a
               href={project.docs}
-              class="flex-1 flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+              class="flex-1 flex items-center justify-center px-4 py-2.5 text-sm font-semibold text-gray-700 dark:text-gray-300 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800 rounded-lg hover:from-gray-100 hover:to-gray-200 dark:hover:from-gray-600 dark:hover:to-gray-700 transition-all border border-gray-200 dark:border-gray-600"
             >
               <BookOpen className="w-4 h-4 mr-2" />
               文档
@@ -110,9 +170,14 @@ const projects = [
         <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all border border-gray-200 dark:border-gray-700 hover:-translate-y-1">
           <div class="flex items-start justify-between mb-4">
             <div class="text-4xl mb-2">{project.icon}</div>
-            <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
-              <Star className="w-4 h-4 mr-1 fill-yellow-400 text-yellow-400" />
-              {project.stars}
+            <div class="flex items-center gap-2">
+              <span class={`px-3 py-1 text-xs font-semibold rounded-full ${statusColors[project.status]}`}>
+                {project.status}
+              </span>
+              <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                <Star className="w-4 h-4 mr-1 fill-yellow-400 text-yellow-400" />
+                {project.stars}
+              </div>
             </div>
           </div>
 
@@ -120,23 +185,39 @@ const projects = [
             {project.name}
           </h3>
 
-          <p class="text-gray-600 dark:text-gray-300 mb-6">
+          <p class="text-gray-600 dark:text-gray-300 mb-4">
             {project.description}
           </p>
+
+          <div class="flex flex-wrap gap-2 mb-4">
+            {project.technologies.map((tech) => (
+              <span class={`px-2.5 py-0.5 text-xs font-medium rounded-md ${techColors[tech] || 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200'}`}>
+                {tech}
+              </span>
+            ))}
+          </div>
+
+          <div class="text-xs text-gray-500 dark:text-gray-400 mb-4">
+            {project.version ? (
+              <span>Version: {project.version}</span>
+            ) : (
+              <span>Last Updated: {project.lastUpdated}</span>
+            )}
+          </div>
 
           <div class="flex gap-3">
             <a
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              class="flex-1 flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-colors"
+              class="flex-1 flex items-center justify-center px-4 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all shadow-md hover:shadow-lg"
             >
               <ExternalLink className="w-4 h-4 mr-2" />
               GitHub
             </a>
             <a
               href={project.docs}
-              class="flex-1 flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+              class="flex-1 flex items-center justify-center px-4 py-2.5 text-sm font-semibold text-gray-700 dark:text-gray-300 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-800 rounded-lg hover:from-gray-100 hover:to-gray-200 dark:hover:from-gray-600 dark:hover:to-gray-700 transition-all border border-gray-200 dark:border-gray-600"
             >
               <BookOpen className="w-4 h-4 mr-2" />
               文档
