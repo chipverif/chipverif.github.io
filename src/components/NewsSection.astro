@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Calendar, Star } from 'lucide-react';
 
 interface Props {
   showSection?: boolean;
@@ -12,6 +12,22 @@ const { showSection = true, showHeader = true } = Astro.props;
 const allNews = await getCollection('news');
 const featuredNews = allNews.filter(n => n.data.featured).slice(0, 3);
 const recentNews = allNews.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 6);
+
+const categoryColors: Record<string, { bg: string; text: string; darkBg: string; darkText: string }> = {
+  'CoCoTB': { bg: 'bg-indigo-100', text: 'text-indigo-700', darkBg: 'dark:bg-indigo-900', darkText: 'dark:text-indigo-300' },
+  'PyUVM': { bg: 'bg-emerald-100', text: 'text-emerald-700', darkBg: 'dark:bg-emerald-900', darkText: 'dark:text-emerald-300' },
+  '开源仿真器': { bg: 'bg-amber-100', text: 'text-amber-700', darkBg: 'dark:bg-amber-900', darkText: 'dark:text-amber-300' },
+  'Chipverif': { bg: 'bg-rose-100', text: 'text-rose-700', darkBg: 'dark:bg-rose-900', darkText: 'dark:text-rose-300' },
+};
+
+function getCategoryColor(category: string) {
+  return categoryColors[category] || {
+    bg: 'bg-gray-100',
+    text: 'text-gray-700',
+    darkBg: 'dark:bg-gray-700',
+    darkText: 'dark:text-gray-300',
+  };
+}
 ---
 
 {showSection ? (
@@ -28,29 +44,71 @@ const recentNews = allNews.sort((a, b) => b.data.date.valueOf() - a.data.date.va
         </div>
       )}
 
+      {featuredNews.length > 0 && (
+        <div class="mb-12">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+            <Star className="h-5 w-5 text-amber-500" fill="currentColor" />
+            精选动态
+          </h3>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {featuredNews.map((item) => {
+              const colors = getCategoryColor(item.data.category);
+              return (
+                <article class="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 hover:shadow-xl transition-all border-2 border-indigo-200 dark:border-indigo-800 hover:border-indigo-400 dark:hover:border-indigo-600 relative">
+                  <div class="absolute top-4 right-4">
+                    <span class="px-2 py-1 text-xs font-bold rounded bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300">
+                      精选
+                    </span>
+                  </div>
+                  <div class="flex items-center gap-3 mb-4">
+                    <span class={`px-3 py-1 text-xs font-semibold rounded-full ${colors.bg} ${colors.text} ${colors.darkBg} ${colors.darkText}`}>
+                      {item.data.category}
+                    </span>
+                    <time class="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                      <Calendar className="h-4 w-4" />
+                      {item.data.date.toLocaleDateString('zh-CN')}
+                    </time>
+                  </div>
+                  <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 pr-16">
+                    <a href={item.data.link || `/news/${item.id}`} class="hover:text-indigo-600 dark:hover:text-indigo-400">
+                      {item.data.title}
+                    </a>
+                  </h3>
+                  <p class="text-gray-600 dark:text-gray-300 line-clamp-3">
+                    {item.rendered?.html?.replace(/<[^>]*>?/gm, '').substring(0, 150)}...
+                  </p>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {recentNews.map((item) => (
-          <article
-            class="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 hover:shadow-lg transition-all border border-gray-200 dark:border-gray-600"
-          >
-            <div class="flex items-center justify-between mb-3">
-              <span class="px-3 py-1 text-xs font-semibold rounded-full bg-indigo-100 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-300">
-                {item.data.category}
-              </span>
-              <time class="text-sm text-gray-500 dark:text-gray-400">
-                {item.data.date.toLocaleDateString('zh-CN')}
-              </time>
-            </div>
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-              <a href={item.data.link || `/news/${item.id}`} class="hover:text-indigo-600 dark:hover:text-indigo-400">
-                {item.data.title}
-              </a>
-            </h3>
-            <p class="text-gray-600 dark:text-gray-300 line-clamp-2">
-              {item.rendered?.html?.replace(/<[^>]*>?/gm, '').substring(0, 100)}...
-            </p>
-          </article>
-        ))}
+        {recentNews.map((item) => {
+          const colors = getCategoryColor(item.data.category);
+          return (
+            <article class="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 hover:shadow-lg transition-all border border-gray-200 dark:border-gray-600 hover:border-indigo-300 dark:hover:border-indigo-500">
+              <div class="flex items-center gap-3 mb-3">
+                <span class={`px-3 py-1 text-xs font-semibold rounded-full ${colors.bg} ${colors.text} ${colors.darkBg} ${colors.darkText}`}>
+                  {item.data.category}
+                </span>
+                <time class="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                  <Calendar className="h-4 w-4" />
+                  {item.data.date.toLocaleDateString('zh-CN')}
+                </time>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2 line-clamp-2">
+                <a href={item.data.link || `/news/${item.id}`} class="hover:text-indigo-600 dark:hover:text-indigo-400">
+                  {item.data.title}
+                </a>
+              </h3>
+              <p class="text-gray-600 dark:text-gray-300 line-clamp-2">
+                {item.rendered?.html?.replace(/<[^>]*>?/gm, '').substring(0, 100)}...
+              </p>
+            </article>
+          );
+        })}
       </div>
 
       <div class="text-center mt-10">
@@ -77,29 +135,71 @@ const recentNews = allNews.sort((a, b) => b.data.date.valueOf() - a.data.date.va
       </div>
     )}
 
+    {featuredNews.length > 0 && (
+      <div class="mb-12">
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+          <Star className="h-5 w-5 text-amber-500" fill="currentColor" />
+          精选动态
+        </h3>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {featuredNews.map((item) => {
+            const colors = getCategoryColor(item.data.category);
+            return (
+              <article class="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 hover:shadow-xl transition-all border-2 border-indigo-200 dark:border-indigo-800 hover:border-indigo-400 dark:hover:border-indigo-600 relative">
+                <div class="absolute top-4 right-4">
+                  <span class="px-2 py-1 text-xs font-bold rounded bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300">
+                    精选
+                  </span>
+                </div>
+                <div class="flex items-center gap-3 mb-4">
+                  <span class={`px-3 py-1 text-xs font-semibold rounded-full ${colors.bg} ${colors.text} ${colors.darkBg} ${colors.darkText}`}>
+                    {item.data.category}
+                  </span>
+                  <time class="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                    <Calendar className="h-4 w-4" />
+                    {item.data.date.toLocaleDateString('zh-CN')}
+                  </time>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 pr-16">
+                  <a href={item.data.link || `/news/${item.id}`} class="hover:text-indigo-600 dark:hover:text-indigo-400">
+                    {item.data.title}
+                  </a>
+                </h3>
+                <p class="text-gray-600 dark:text-gray-300 line-clamp-3">
+                  {item.rendered?.html?.replace(/<[^>]*>?/gm, '').substring(0, 150)}...
+                </p>
+              </article>
+            );
+          })}
+        </div>
+      </div>
+    )}
+
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {recentNews.map((item) => (
-        <article
-          class="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 hover:shadow-lg transition-all border border-gray-200 dark:border-gray-600"
-        >
-          <div class="flex items-center justify-between mb-3">
-            <span class="px-3 py-1 text-xs font-semibold rounded-full bg-indigo-100 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-300">
-              {item.data.category}
-            </span>
-            <time class="text-sm text-gray-500 dark:text-gray-400">
-              {item.data.date.toLocaleDateString('zh-CN')}
-            </time>
-          </div>
-          <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-            <a href={item.data.link || `/news/${item.id}`} class="hover:text-indigo-600 dark:hover:text-indigo-400">
-              {item.data.title}
-            </a>
-          </h3>
-          <p class="text-gray-600 dark:text-gray-300 line-clamp-2">
-            {item.rendered?.html?.replace(/<[^>]*>?/gm, '').substring(0, 100)}...
-          </p>
-        </article>
-      ))}
+      {recentNews.map((item) => {
+        const colors = getCategoryColor(item.data.category);
+        return (
+          <article class="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 hover:shadow-lg transition-all border border-gray-200 dark:border-gray-600 hover:border-indigo-300 dark:hover:border-indigo-500">
+            <div class="flex items-center gap-3 mb-3">
+              <span class={`px-3 py-1 text-xs font-semibold rounded-full ${colors.bg} ${colors.text} ${colors.darkBg} ${colors.darkText}`}>
+                {item.data.category}
+              </span>
+              <time class="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
+                <Calendar className="h-4 w-4" />
+                {item.data.date.toLocaleDateString('zh-CN')}
+              </time>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2 line-clamp-2">
+              <a href={item.data.link || `/news/${item.id}`} class="hover:text-indigo-600 dark:hover:text-indigo-400">
+                {item.data.title}
+              </a>
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300 line-clamp-2">
+              {item.rendered?.html?.replace(/<[^>]*>?/gm, '').substring(0, 100)}...
+            </p>
+          </article>
+        );
+      })}
     </div>
 
     <div class="text-center mt-10">
