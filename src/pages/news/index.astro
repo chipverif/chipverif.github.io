@@ -6,15 +6,15 @@ const allNews = await getCollection('news');
 const recentNews = allNews.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
-<BaseLayout title="新闻动态">
+<BaseLayout title="News">
   <div class="pt-12 pb-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
         <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-          动态资讯
+          Latest News
         </h1>
         <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-          CoCoTB、PyUVM、开源仿真器最新动态 + Chipverif 新闻
+          Latest updates on CoCoTB, PyUVM, open-source simulators + Chipverif news
         </p>
       </div>
 
