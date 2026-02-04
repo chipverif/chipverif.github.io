@@ -12,9 +12,27 @@ import SimulatorsSection from '../components/SimulatorsSection.astro';
 <BaseLayout>
   <Hero />
   <CompanyBanner />
-  <NewsSection />
-  <ProjectsSection />
+  
+  <div class="border-b border-gray-200 dark:border-gray-800"></div>
+  
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
+    <div class="py-24 bg-white dark:bg-gray-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <NewsSection showSection={false} />
+      </div>
+    </div>
+    <div class="py-24 bg-gray-50 dark:bg-gray-900">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <ProjectsSection showSection={false} />
+      </div>
+    </div>
+  </div>
+  
   <LicenseSection />
+  
+  <div class="border-b border-gray-200 dark:border-gray-800"></div>
+  
   <ResourcesSection />
+  
   <SimulatorsSection />
 </BaseLayout>

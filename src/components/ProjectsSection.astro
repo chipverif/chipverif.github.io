@@ -1,6 +1,13 @@
 ---
 import { Star, ExternalLink, BookOpen } from 'lucide-react';
 
+interface Props {
+  showSection?: boolean;
+  showHeader?: boolean;
+}
+
+const { showSection = true, showHeader = true } = Astro.props;
+
 const projects = [
   {
     name: 'CoCoTB DPI',
@@ -29,16 +36,74 @@ const projects = [
 ];
 ---
 
-<section class="py-20 bg-gray-50 dark:bg-gray-900">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-12">
-      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-        核心项目
-      </h2>
-      <p class="text-gray-600 dark:text-gray-300">
-        开源验证工具，助力加速芯片验证开发
-      </p>
+{showSection ? (
+  <section class="py-24 bg-gray-50 dark:bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {showHeader && (
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+            核心项目
+          </h2>
+          <p class="text-gray-600 dark:text-gray-300">
+            开源验证工具，助力加速芯片验证开发
+          </p>
+        </div>
+      )}
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {projects.map((project) => (
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all border border-gray-200 dark:border-gray-700 hover:-translate-y-1">
+          <div class="flex items-start justify-between mb-4">
+            <div class="text-4xl mb-2">{project.icon}</div>
+            <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+              <Star className="w-4 h-4 mr-1 fill-yellow-400 text-yellow-400" />
+              {project.stars}
+            </div>
+          </div>
+
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+            {project.name}
+          </h3>
+
+          <p class="text-gray-600 dark:text-gray-300 mb-6">
+            {project.description}
+          </p>
+
+          <div class="flex gap-3">
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex-1 flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-colors"
+            >
+              <ExternalLink className="w-4 h-4 mr-2" />
+              GitHub
+            </a>
+            <a
+              href={project.docs}
+              class="flex-1 flex items-center justify-center px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+            >
+              <BookOpen className="w-4 h-4 mr-2" />
+              文档
+            </a>
+          </div>
+        </div>
+        ))}
+      </div>
     </div>
+  </section>
+) : (
+  <>
+    {showHeader && (
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+          核心项目
+        </h2>
+        <p class="text-gray-600 dark:text-gray-300">
+          开源验证工具，助力加速芯片验证开发
+        </p>
+      </div>
+    )}
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       {projects.map((project) => (
@@ -80,5 +145,6 @@ const projects = [
         </div>
       ))}
     </div>
-  </div>
-</section>
+  </>
+)}
+
