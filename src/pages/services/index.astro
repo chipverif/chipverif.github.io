@@ -5,68 +5,68 @@ import { Zap, Users, Cog, Lightbulb } from 'lucide-react';
 const services = [
   {
     icon: Zap,
-    title: 'CoCoTB 教学',
-    description: '从入门到精通的 CoCoTB 系统培训',
+    title: 'CoCoTB Training',
+    description: 'Comprehensive CoCoTB system training from basics to advanced',
     features: [
-      '基础概念和架构',
-      '高级特性与最佳实践',
-      '实战项目演练',
-      '一对一答疑指导'
+      'Basic concepts and architecture',
+      'Advanced features and best practices',
+      'Practical project exercises',
+      'One-on-one Q&A guidance'
     ],
-    pricing: '联系我们获取报价',
-    contact: 'training@chipverif.com'
+    pricing: 'Contact us for quote',
+    contact: 'opensource@chipverif.com'
   },
   {
     icon: Users,
-    title: '技术支持',
-    description: '专业的技术支持服务',
+    title: 'Technical Support',
+    description: 'Professional technical support services',
     features: [
-      '问题排查与调试',
-      '性能优化建议',
-      '代码 review',
-      '技术咨询'
+      'Troubleshooting and debugging',
+      'Performance optimization recommendations',
+      'Code review',
+      'Technical consultation'
     ],
-    pricing: '根据支持级别定价',
-    contact: 'support@chipverif.com'
+    pricing: 'Pricing based on support level',
+    contact: 'opensource@chipverif.com'
   },
   {
     icon: Cog,
-    title: '定制 VIP',
-    description: '根据需求定制验证 IP',
+    title: 'Custom VIP',
+    description: 'Custom verification IPs based on requirements',
     features: [
-      '协议定制开发',
-      '功能扩展',
-      '性能优化',
-      '文档和测试'
+      'Protocol custom development',
+      'Functionality extensions',
+      'Performance optimization',
+      'Documentation and testing'
     ],
-    pricing: '按项目定价',
-    contact: 'custom@chipverif.com'
+    pricing: 'Pricing by project',
+    contact: 'opensource@chipverif.com'
   },
   {
     icon: Lightbulb,
-    title: '咨询服务',
-    description: '验证策略与架构设计',
+    title: 'Consulting Services',
+    description: 'Verification strategy and architecture design',
     features: [
-      '验证计划制定',
-      '架构设计评审',
-      '流程优化建议',
-      '团队培训规划'
+      'Verification planning',
+      'Architecture design review',
+      'Process optimization recommendations',
+      'Team training planning'
     ],
-    pricing: '按时长或项目定价',
-    contact: 'consulting@chipverif.com'
+    pricing: 'Pricing by duration or project',
+    contact: 'opensource@chipverif.com'
   }
 ];
 ---
 
-<BaseLayout title="服务">
+<BaseLayout title="Services">
   <div class="pt-12 pb-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
         <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-          我们的服务
+          Our Services
         </h1>
         <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-          提供全面的 CoCoTB 生态服务，从培训到定制开发
+          Comprehensive CoCoTB ecosystem services, from training to custom development
         </p>
       </div>
 
@@ -79,7 +79,7 @@ const services = [
               </div>
               <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">
                 {service.title}
-                {index === 0 && <span class="ml-2 px-2 py-1 text-xs font-semibold bg-indigo-600 text-white rounded-full">热门</span>}
+                {index === 0 && <span class="ml-2 px-2 py-1 text-xs font-semibold bg-indigo-600 text-white rounded-full">Popular</span>}
               </h2>
               <p class="text-gray-600 dark:text-gray-300 mb-6">
                 {service.description}
@@ -95,7 +95,7 @@ const services = [
               </ul>
 
               <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-6">
-                <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">定价</p>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-1">Pricing</p>
                 <p class="font-semibold text-gray-900 dark:text-white">
                   {service.pricing}
                 </p>
@@ -105,7 +105,7 @@ const services = [
                 href={`mailto:${service.contact}`}
                 class="inline-flex items-center px-6 py-3 text-base font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition-all w-full justify-center shadow-lg hover:shadow-xl"
               >
-                联系我们
+                Contact Us
               </a>
             </div>
           </div>
@@ -114,42 +114,42 @@ const services = [
 
       <div class="mt-16 bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700">
         <div class="bg-gradient-to-r from-indigo-600 to-purple-600 px-8 py-4">
-          <h3 class="text-xl font-bold text-white">服务对比</h3>
+          <h3 class="text-xl font-bold text-white">Service Comparison</h3>
         </div>
         <div class="overflow-x-auto">
           <table class="w-full">
             <thead class="bg-gray-50 dark:bg-gray-700">
               <tr>
-                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">服务类型</th>
-                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">核心特性</th>
-                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">定价模式</th>
-                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">响应时间</th>
+                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">Service Type</th>
+                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">Key Features</th>
+                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">Pricing Model</th>
+                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-900 dark:text-white">Response Time</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
               <tr class="bg-indigo-50/50 dark:bg-indigo-900/10">
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">CoCoTB 教学</td>
-                <td class="px-6 py-4 text-gray-600 dark:text-gray-300">系统培训、实战演练、一对一指导</td>
-                <td class="px-6 py-4 text-gray-600 dark:text-gray-300">联系报价</td>
-                <td class="px-6 py-4"><span class="px-2 py-1 text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 rounded-full">24小时内</span></td>
+                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">CoCoTB Training</td>
+                <td class="px-6 py-4 text-gray-600 dark:text-gray-300">System training, practical exercises, one-on-one guidance</td>
+                <td class="px-6 py-4 text-gray-600 dark:text-gray-300">Contact for quote</td>
+                <td class="px-6 py-4"><span class="px-2 py-1 text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300 rounded-full">Within 24 hours</span></td>
               </tr>
               <tr>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">技术支持</td>
-                <td class="px-6 py-4 text-gray-600 dark:text-gray-300">问题排查、性能优化、代码 review</td>
-                <td class="px-6 py-4 text-gray-600 dark:text-gray-300">支持级别定价</td>
-                <td class="px-6 py-4"><span class="px-2 py-1 text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full">48小时内</span></td>
+                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">Technical Support</td>
+                <td class="px-6 py-4 text-gray-600 dark:text-gray-300">Troubleshooting, performance optimization, code review</td>
+                <td class="px-6 py-4 text-gray-600 dark:text-gray-300">Pricing by support level</td>
+                <td class="px-6 py-4"><span class="px-2 py-1 text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full">Within 48 hours</span></td>
               </tr>
               <tr class="bg-indigo-50/50 dark:bg-indigo-900/10">
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">定制 VIP</td>
-                <td class="px-6 py-4 text-gray-600 dark:text-gray-300">协议定制、功能扩展、性能优化</td>
-                <td class="px-6 py-4 text-gray-600 dark:text-gray-300">按项目定价</td>
-                <td class="px-6 py-4"><span class="px-2 py-1 text-xs font-medium bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 rounded-full">按项目周期</span></td>
+                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">Custom VIP</td>
+                <td class="px-6 py-4 text-gray-600 dark:text-gray-300">Protocol customization, functionality extensions, performance optimization</td>
+                <td class="px-6 py-4 text-gray-600 dark:text-gray-300">Pricing by project</td>
+                <td class="px-6 py-4"><span class="px-2 py-1 text-xs font-medium bg-yellow-100 dark:bg-yellow-900/30 text-yellow-800 dark:text-yellow-300 rounded-full">Project-based</span></td>
               </tr>
               <tr>
-                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">咨询服务</td>
-                <td class="px-6 py-4 text-gray-600 dark:text-gray-300">验证计划、架构设计、流程优化</td>
-                <td class="px-6 py-4 text-gray-600 dark:text-gray-300">时长/项目定价</td>
-                <td class="px-6 py-4"><span class="px-2 py-1 text-xs font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 rounded-full">1周内</span></td>
+                <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">Consulting Services</td>
+                <td class="px-6 py-4 text-gray-600 dark:text-gray-300">Verification planning, architecture design, process optimization</td>
+                <td class="px-6 py-4 text-gray-600 dark:text-gray-300">Pricing by duration/project</td>
+                <td class="px-6 py-4"><span class="px-2 py-1 text-xs font-medium bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300 rounded-full">Within 1 week</span></td>
               </tr>
             </tbody>
           </table>
@@ -158,16 +158,16 @@ const services = [
 
       <div class="mt-16 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-8 text-center text-white shadow-xl">
         <h3 class="text-2xl font-bold mb-4">
-          需要定制化解决方案？
+          Need customized solutions?
         </h3>
         <p class="text-indigo-100 mb-6 max-w-2xl mx-auto">
-          我们可以根据您的具体需求提供个性化的服务和解决方案
+          We can provide personalized services and solutions based on your specific needs
         </p>
         <a
           href="/contact"
           class="inline-flex items-center px-8 py-3 text-base font-semibold bg-white text-indigo-600 rounded-lg hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl"
         >
-          立即咨询
+          Contact Us Now
         </a>
       </div>
     </div>
