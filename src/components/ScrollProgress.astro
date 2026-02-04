@@ -1,0 +1,37 @@
+---
+const progressBarId = 'scroll-progress';
+---
+<script>
+  let progressBar: HTMLElement;
+
+  function updateScrollProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
+    progressBar.style.width = `${scrollPercent}%`;
+  }
+
+  // Show/hide based on scroll position
+  function toggleProgressBar() {
+    if (window.scrollY > 100) {
+      progressBar.style.opacity = '1';
+    } else {
+      progressBar.style.opacity = '0';
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    progressBar = document.getElementById('{progressBarId}') as HTMLElement;
+    window.addEventListener('scroll', () => {
+      updateScrollProgress();
+      toggleProgressBar();
+    });
+    updateScrollProgress();
+  });
+</script>
+
+<div
+  id={progressBarId}
+  class="fixed top-0 left-0 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 z-50 transition-opacity duration-300 opacity-0"
+  style="width: 0%"
+></div>

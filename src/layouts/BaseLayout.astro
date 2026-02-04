@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import ScrollProgress from '../components/ScrollProgress.astro';
 
 const { title = 'Chipverif' } = Astro.props;
 ---
@@ -17,6 +18,7 @@ const { title = 'Chipverif' } = Astro.props;
     <title>{title} | Chipverif</title>
   </head>
   <body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors">
+    <ScrollProgress />
     <Navbar />
     <main class="pt-16">
       <slot />
