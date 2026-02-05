@@ -1,0 +1,159 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Target, Zap, Shield, Users, Code, CheckCircle } from 'lucide-react';
+---
+
+<BaseLayout title="About Us">
+  <div class="pt-12 pb-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          About Chipverif
+        </h1>
+        <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          Building the future of chip verification with CoCoTB ecosystem
+        </p>
+      </div>
+
+      <div class="mb-20">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+              Our Mission
+            </h2>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">
+              Chipverif is dedicated to democratizing chip verification by making professional verification tools accessible to everyone. We believe that great verification tools shouldn't be exclusive to large corporations with deep pockets.
+            </p>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">
+              Through our CoCoTB-based ecosystem, we provide open-source frameworks, free-to-use commercial VIPs, and professional services to accelerate chip development for companies of all sizes.
+            </p>
+            <p class="text-gray-600 dark:text-gray-300">
+              Our goal is to make chip verification faster, easier, and more affordable through Python-based solutions that leverage the power of open-source communities.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-6">
+            <div class="bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-2xl p-6 text-center">
+              <div class="text-4xl font-bold text-indigo-600 dark:text-indigo-400 mb-2">10K+</div>
+              <div class="text-gray-600 dark:text-gray-300 text-sm">Users Worldwide</div>
+            </div>
+            <div class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-2xl p-6 text-center">
+              <div class="text-4xl font-bold text-green-600 dark:text-green-400 mb-2">50+</div>
+              <div class="text-gray-600 dark:text-gray-300 text-sm">Companies Served</div>
+            </div>
+            <div class="bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-2xl p-6 text-center">
+              <div class="text-4xl font-bold text-blue-600 dark:text-blue-400 mb-2">20+</div>
+              <div class="text-gray-600 dark:text-gray-300 text-sm">Open Source Projects</div>
+            </div>
+            <div class="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-2xl p-6 text-center">
+              <div class="text-4xl font-bold text-purple-600 dark:text-purple-400 mb-2">100%</div>
+              <div class="text-gray-600 dark:text-gray-300 text-sm">Free VIP Access</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mb-20">
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center">
+          Why Choose Us
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+            <div class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900 rounded-xl flex items-center justify-center mb-4">
+              <Zap className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+              Python-Powered
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300">
+              Leverage Python's flexibility and rich ecosystem for faster verification development and easier maintenance.
+            </p>
+          </div>
+
+          <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+            <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-xl flex items-center justify-center mb-4">
+              <CheckCircle className="w-6 h-6 text-green-600 dark:text-green-400" />
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+              Free to Use
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300">
+              Our commercial VIPs are completely free to use. Get professional verification IP without licensing fees.
+            </p>
+          </div>
+
+          <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+            <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-xl flex items-center justify-center mb-4">
+              <Shield className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+              Production Ready
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300">
+              Our tools are battle-tested in real-world designs with comprehensive documentation and technical support.
+            </p>
+          </div>
+
+          <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-xl flex items-center justify-center mb-4">
+              <Code className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+              Open Source
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300">
+              Core frameworks are open source. Contribute, customize, and benefit from community innovations.
+            </p>
+          </div>
+
+          <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+            <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900 rounded-xl flex items-center justify-center mb-4">
+              <Target className="w-6 h-6 text-orange-600 dark:text-orange-400" />
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+              Expert Support
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300">
+              Get professional training and consulting from experts who build and use these tools daily.
+            </p>
+          </div>
+
+          <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-sm border border-gray-200 dark:border-gray-700">
+            <div class="w-12 h-12 bg-cyan-100 dark:bg-cyan-900 rounded-xl flex items-center justify-center mb-4">
+              <Users className="w-6 h-6 text-cyan-600 dark:text-cyan-400" />
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+              Active Community
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300">
+              Join thousands of developers, share knowledge, and grow together in our vibrant community.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-900 dark:to-purple-900 rounded-2xl p-12 text-white text-center">
+        <h2 class="text-3xl font-bold mb-6">
+          Ready to Accelerate Your Verification?
+        </h2>
+        <p class="text-xl text-indigo-100 mb-8 max-w-2xl mx-auto">
+          Get started with our free tools or contact us for enterprise solutions
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/docs"
+            class="inline-flex items-center justify-center px-8 py-3 text-base font-semibold text-indigo-600 bg-white rounded-lg hover:bg-gray-50 transition-all shadow-lg hover:shadow-xl"
+          >
+            Explore Documentation
+          </a>
+          <a
+            href="/contact"
+            class="inline-flex items-center justify-center px-8 py-3 text-base font-semibold text-white bg-transparent border-2 border-white rounded-lg hover:bg-white/10 transition-all"
+          >
+            Contact Us
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
